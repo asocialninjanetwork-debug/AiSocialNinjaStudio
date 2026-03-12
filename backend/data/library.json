@@ -1,0 +1,16 @@
+[
+  {
+    "id": "00000000-0000-0000-0000-000000000001",
+    "title": "Image Classification Basics",
+    "tags": ["computer vision", "classification", "CNN"],
+    "content": "Image classification is the process of assigning a label to an entire image. Common architectures include ResNet and MobileNet. Training requires labeled datasets and data augmentation.",
+    "createdAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "00000000-0000-0000-0000-000000000002",
+    "title": "Object Detection Overview",
+    "tags": ["computer vision", "detection", "SSD", "YOLO"],
+    "content": "Object detection finds and localizes objects using bounding boxes. Popular models include YOLOv5, Faster R-CNN, and SSD. Performance depends on anchor strategies and post-processing NMS.",
+    "createdAt": "2026-01-01T00:00:00.000Z"
+  }
+]
