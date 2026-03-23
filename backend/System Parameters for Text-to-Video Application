@@ -1,0 +1,112 @@
+System Parameters for Text-to-Video Application
+
+This document defines the system parameters and configuration guidelines for securely integrating Hugging Face and MongoDB pipelines to optimize the functionalities of a text-to-video application while leveraging free-tier services.
+
+---
+
+1. System Overview
+* Application Name: Text2Video Optimizer
+* Primary Functions:
+    * Convert text prompts to video sequences.
+    * Store and retrieve video metadata and user sessions.
+    * Optimize inference speed and storage within free-tier limits.
+
+---
+
+2. Integration Services and Pipelines
+
+Hugging Face Integration
+* Service: Hugging Face Inference API (Free Tier)
+* Functions:
+    * Text-to-video model inference.
+    * Optional text preprocessing and tokenization.
+* Environment Variables:
+HF_API_KEY = [your_huggingface_api_key]
+HF_MODEL_ENDPOINT = https://api-inference.huggingface.co/models/[model_name]
+* Security:
+    * Use .env files to store API keys.
+    * Limit API calls to prevent free-tier throttling.
+
+MongoDB Integration
+* Service: MongoDB Atlas (Free Tier)
+* Functions:
+    * Store video metadata, user data, and processing logs.
+    * Query for historical data and analytics.
+* Environment Variables:
+MONGO_URI = mongodb+srv://[username]:[password]@[cluster_url]/?retryWrites=true&w=majority
+MONGO_DB_NAME = text2video_db
+* Security:
+    * Use IP allowlisting.
+    * Enable TLS/SSL connections.
+
+---
+
+3. Pipeline Configuration
+
+Text-to-Video Pipeline
+1. Input Validation
+    * Filter and sanitize text prompts.
+2. Inference Request
+    * Call Hugging Face model endpoint.
+3. Video Generation Handling
+    * Stream output to temporary storage.
+4. Metadata Logging
+    * Store video ID, prompt, timestamp, and duration in MongoDB.
+
+Error Handling & Retry Logic
+* Implement exponential backoff for failed API calls.
+* Log errors to pipeline_logs collection in MongoDB.
+
+---
+
+4. System Optimization Parameters
+* Batch Requests: Combine prompts where possible to minimize API calls.
+* Free-Tier Storage Management:
+    * Automatically purge old entries beyond retention period.
+    * Leverage cloud storage links for large video files.
+* Caching:
+    * Cache repeated prompts and results locally to reduce inference cost.
+
+---
+
+5. Deployment Recommendations
+* Environment:
+    * Deploy on a lightweight containerized service (e.g., Render free tier, or Railway free tier).
+* Scaling Strategy:
+    * Use asynchronous task queues for non-blocking video generation.
+    * Monitor free-tier limits with alerts.
+
+---
+
+6. Security Best Practices
+* Credential Management: Store all keys in environment variables.
+* Network Security: Enable IP whitelisting for MongoDB Atlas.
+* Data Privacy: Ensure personally identifiable information is encrypted before database storage.
+
+---
+
+7. Example .env File
+HF_API_KEY=your_huggingface_api_key
+HF_MODEL_ENDPOINT=https://api-inference.huggingface.co/models/your_model
+MONGO_URI=mongodb+srv://user:password@cluster.mongodb.net
+MONGO_DB_NAME=text2video_db
+
+---
+
+8. Monitoring & Logs
+* Logs Storage: MongoDB collection pipeline_logs
+* Metrics: Track:
+    * API call success/failure rate
+    * Average inference time
+    * Free-tier usage thresholds
+
+---
+
+9. Future Optimizations
+* Implement queue-based autoscaling.
+* Add cloud function triggers for post-processing.
+* Integrate CDN for video delivery.
+
+---
+
+End of System Parameters File
