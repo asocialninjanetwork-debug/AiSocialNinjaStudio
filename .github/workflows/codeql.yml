@@ -1,0 +1,72 @@
+Here’s the updated workflow file with your Setup Node.js environment snippet added in the correct location, right after the Checkout repository step and before Initialize CodeQL:
+
+# For most projects, this workflow file will not need changing; you simply need
+# to commit it to your repository.
+#
+# You may wish to alter this file to override the set of languages analyzed,
+# or to provide custom queries or build logic.
+#
+# ******** NOTE ********
+# We have attempted to detect the languages in your repository. Please check
+# the `language` matrix defined below to confirm you have the correct set of
+# supported CodeQL languages.
+#
+name: "CodeQL Advanced"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '38 17 * * 1' # Runs at 17:38, only on Monday
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - language: actions
+          build-mode: none
+        - language: javascript-typescript
+          build-mode: none
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v6.3.0
+      with:
+        # Version Spec of the version to use. Examples: 12.x, 10.15.1, >=10.15.0.
+        node-version: # optional
+        # File containing the version Spec of the version to use.
+        node-version-file: # optional
+        architecture: # optional
+        check-latest: # optional
+        registry-url: # optional
+        scope: # optional
+        token: # optional, default is ${{ github.server_url == 'https://github.com' && github.token || '' }}
+        cache: # optional
+        package-manager-cache: # optional, default is true
+        cache-dependency-path: # optional
+        mirror: # optional
+        mirror-token: # optional
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v4
+      with:
+        languages: ${{ matrix.language }}
+        build-mode: ${{ matrix.build-mode }}
+        category: "/language:${{matrix.language}}"
+
+This keeps your runtime setup before CodeQL initialization as recommended in the comments of the original file.
