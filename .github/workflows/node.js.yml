@@ -39,7 +39,3 @@ If you also want to set up Go, create a second job like this:
           go-version: '1.21'
 
       - run: go version
-
----
-
-This will properly separate Node.js and Go workflows.
