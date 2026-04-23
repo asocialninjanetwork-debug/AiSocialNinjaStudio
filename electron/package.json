@@ -1,0 +1,48 @@
+{
+  "name": "ai-social-ninja-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI Social Ninja Studio - Desktop Application",
+  "main": "main.js",
+  "homepage": "./",
+  "scripts": {
+    "start": "electron .",
+    "dev": "cross-env NODE_ENV=development electron .",
+    "build": "npm run build-frontend && npm run build-electron",
+    "build-frontend": "cd ../frontend && npm run build",
+    "build-electron": "electron-builder",
+    "react-dev": "cd ../frontend && npm run dev",
+    "electron-dev": "cross-env NODE_ENV=development electron ."
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "electron": "^latest",
+    "electron-builder": "^latest",
+    "cross-env": "^7.0.3"
+  },
+  "build": {
+    "appId": "com.aisocia-ninja.studio",
+    "productName": "AI Social Ninja Studio",
+    "files": [
+      "main.js",
+      "preload.js",
+      "assets/**",
+      "../frontend/dist/**"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "win": {
+      "target": ["nsis", "portable"]
+    },
+    "mac": {
+      "target": ["dmg", "zip"]
+    },
+    "linux": {
+      "target": ["AppImage", "deb"]
+    }
+  }
+}
