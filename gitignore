@@ -1,0 +1,63 @@
+# Go build artifacts
+*.o
+*.a
+*.so
+.DS_Store
+/bin/
+/dist/
+/vendor/
+go.sum
+go.mod.bak
+
+# Go test cache
+.testcache
+*.test
+*.out
+
+# Go workspace files (Go 1.18+)
+go.work
+go.work.sum
+
+# Go IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Node.js (for your existing Node workflows)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build outputs
+/build/
+/dist/
+/output/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# CI/CD artifacts
+*.log
+.github/workflows/.cache/
+
+# Temporary files
+*.tmp
+*.swp
+*.bak
+*~
+
+# Dependencies cache
+go-sum.lock
