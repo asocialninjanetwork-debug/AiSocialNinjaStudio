@@ -1,0 +1,15 @@
+{
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.sayHello",
+        "title": "Hello World",
+        "category": "Hello",
+        "icon": {
+          "light": "path/to/light/icon.svg",
+          "dark": "path/to/dark/icon.svg"
+        }
+      }
+    ]
+  }
+}
