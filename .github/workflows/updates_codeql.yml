@@ -44,7 +44,7 @@ jobs:
       matrix:
         include:
         - language: actions
-          build-mode: none
+          build-mode: mobbdev
         - language: javascript-typescript
           build-mode: none
         # CodeQL supports the following values keywords for 'language': 'actions', 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'rust', 'swift'
@@ -92,7 +92,26 @@ jobs:
           'languages you are analyzing, replace this with the commands to build' \
           'your code, for example:'
         echo '  make bootstrap'
-        echo '  make release'
+        echo '              - name: mobbdev
+  # You may pin to the exact commit or the version.
+  # uses: mobb-dev/action@bc442c1699f4b9d6d98d0b8ab501a4f6b508e3df
+  uses: mobb-dev/action@v1.1
+  with:
+    # Path to SAST report file
+    report-file: 
+    # Mobb API key
+    api-key: 
+    # GitaHub Token
+    github-token: 
+    # Mobb Project Name
+    mobb-project-name: # optional
+    # Auto-PR flag
+    auto-pr: # optional
+    # Commit Directly flag, this requires Auto-PR flag to be set. Once enabled, Mobb will commit the fixes directly to the branch
+    commit-directly: # optional
+    # Organization ID
+    organization-id: # optional
+          'make release'
         on:
   push:
     branches:
